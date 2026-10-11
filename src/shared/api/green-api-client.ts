@@ -30,7 +30,6 @@ export class GreenApiClient {
     const path = `waInstance${idInstance}/sendMessage/${apiTokenInstance}`;
     const { url, headers } = this.getEndpoint(path, credentials);
 
-    console.log("sendMessage URL!!!: ", url, request);
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -61,12 +60,10 @@ export class GreenApiClient {
     const path = `waInstance${idInstance}/receiveNotification/${apiTokenInstance}?receiveTimeout=${timeout}`;
     const { url, headers } = this.getEndpoint(path, credentials);
 
-    console.log("receiveNotification URL!!!: ", url);
     const response = await fetch(url, {
       method: 'GET',
       headers,
     });
-    console.log("receiveNotification Response!!!: ", response);
     if (!response.ok) {
       if (response.status === 400) {
         const err = await response.json().catch(() => ({}));
@@ -118,14 +115,10 @@ export class GreenApiClient {
     const path = `waInstance${idInstance}/getStateInstance/${apiTokenInstance}`;
     const { url, headers } = this.getEndpoint(path, credentials);
 
-    console.log("getStateInstance URL!!!: ", url, headers);
-
     const response = await fetch(url, {
       method: 'GET',
       headers,
     });
-
-    console.log("getStateInstance Response!!!: ", response);
 
     if (!response.ok) {
       const err = await response.json().catch(() => ({}));

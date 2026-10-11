@@ -8,7 +8,6 @@ type RouteContext = {
 };
 
 async function handleProxy(req: NextRequest, context: RouteContext) {
-  console.log('handleProxy 1')
   try {
     const { path } = await context.params;
     const targetPath = path.join('/');
@@ -39,7 +38,7 @@ async function handleProxy(req: NextRequest, context: RouteContext) {
       }
     }
 
-    console.log('proxyURL',targetUrl.toString())
+    console.log(targetUrl.toString())
     const response = await fetch(targetUrl.toString(), {
       method: req.method,
       headers,
@@ -65,16 +64,13 @@ async function handleProxy(req: NextRequest, context: RouteContext) {
 }
 
 export async function GET(req: NextRequest, context: RouteContext) {
-  console.log('PROXY GET')
   return handleProxy(req, context);
 }
 
 export async function POST(req: NextRequest, context: RouteContext) {
-  console.log('PROXY POST')
   return handleProxy(req, context);
 }
 
 export async function DELETE(req: NextRequest, context: RouteContext) {
-  console.log('PROXY DELETE')  
   return handleProxy(req, context);
 }
